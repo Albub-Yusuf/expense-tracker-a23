@@ -10,4 +10,8 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = ['category','user_id'];
+
+    public function expenses(){
+        return $this->hasMany(Expense::class);
+    }
 }

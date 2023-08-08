@@ -13,8 +13,18 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('details');
+            $table->integer('amount');
+            $table->string('date');
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnUpdate();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate();
+            $table->timestamp('create_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
+
+        
     }
 
     /**

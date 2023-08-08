@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,8 @@ Route::middleware('auth')->group(function () {
 Route::resource('category',CategoryController::class)->middleware(['auth','verified']);
 
 Route::resource('income',IncomeController::class)->middleware(['auth','verified']);
+
+Route::resource('expense',ExpenseController::class)->middleware(['auth','verified']);
 
 
 require __DIR__.'/auth.php';

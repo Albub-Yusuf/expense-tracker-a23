@@ -103,12 +103,12 @@
 
 
 
-<h2>Categories List</h2>
+<h2>Category List</h2>
 
 
 
 
-<x-primary-button><a href="{{route('category.create')}}">Add Category</a></x-primary-button>
+<a href="{{route('category.create')}}"><x-primary-button>Add Category</x-primary-button></a>
 
 
 </div>
