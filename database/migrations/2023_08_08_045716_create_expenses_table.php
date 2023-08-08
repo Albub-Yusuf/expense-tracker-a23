@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnUpdate();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate();
-            $table->timestamp('create_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
 

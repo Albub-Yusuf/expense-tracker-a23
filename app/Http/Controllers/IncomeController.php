@@ -61,7 +61,8 @@ class IncomeController extends Controller
         $request->validate([
             'details' => 'required',
             'amount' => 'required|integer',
-            'date' => 'required'
+            'date' => 'required',
+            
         ]);
         
 

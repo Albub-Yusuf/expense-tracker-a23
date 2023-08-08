@@ -25,4 +25,71 @@ class ExpenseController extends Controller
         return view('expenses.create',$data);
 
     }
+
+    public function store(Request $request){
+
+        $request->validate([
+
+            'details'=>'required',
+            'amount' => 'required|integer',
+            'date' => 'required',
+            'category'=>'required'
+
+        ]);
+        $result = Expense::create([
+            'details'=>$request->details,
+            'amount'=>$request->amount,
+            'date'=>$request->date,
+            'category_id'=>$request->category,
+            'user_id'=>$request->userId
+        ]);
+
+        if($result){
+      
+            return redirect()->route('expenses.index')->with('success', 'Expense Added Successfully');
+
+        }else{
+            return redirect()->route('expenses.index')->with('failed', 'Something went wrong!');
+        }
+    }
+
+
+    public function edit(Expense $expense){
+
+        $data['expenseDetails'] = Expense::with('category')->where('user_id',Auth::user()->id)->where('id',$expense->id)->first();
+        $data['categories'] = Category::where('user_id',Auth()->user()->id)->get();
+        return view('expenses.edit',$data);
+
+    }
+
+    public function update(Expense $expense,Request $request){
+        
+
+        $request->validate([
+            'details' => 'required',
+            'amount' => 'required|integer',
+            'date' => 'required',
+            'category'=>'required'
+            
+        ]);
+        
+
+        $result = Expense::where('user_id',Auth::user()->id)->where('id',$expense->id)
+                    ->update([
+                        'details'=>$request->details,
+                        'amount'=>$request->amount,
+                        'date'=>$request->date,
+                        'category_id'=>$request->category,
+                        'user_id'=>Auth::user()->id
+                    ]);
+        if($result){
+            return redirect()->route('expense.index')->with('updated', 'Expense Updated Successfully!');
+
+        }else{
+            return redirect()->route('expense.index')->with('failed', 'Something went wrong!');
+
+        }
+
+
+    }
 }
