@@ -135,13 +135,13 @@
                 </svg>
             </x-secondary-button>
             </a>
-        
-         | 
+            &nbsp;&nbsp;&nbsp;
+         | &nbsp;&nbsp;&nbsp;
          <form action="{{route('category.destroy',$category->id)}}" method="post">
             @csrf
             @method('delete')
-         <x-secondary-button>
-            <input type="submit" value="X" />
+         <x-secondary-button type="submit"  onclick="return confirm('Are you sure to delete this record!');" value="X">
+            X
         </x-secondary-button>
          </form>
         </div>
