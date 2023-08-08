@@ -103,6 +103,23 @@
 
 
 <div class="container mx-auto">
+<div class="row my-4">
+    <div class="col-md-12">
+        
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-4 text-gray-900">
+                     <h2 class="my-2 text-center text-danger" style="font-size:24px;">Total Summary</h2>
+
+                    <h2 class="my-2 text-right text-success" style="font-size:18px;">Total Income = {{$totalIncome}} BDT</h2>
+                    <h2 class="my-2 text-right text-danger" style="font-size:18px;">Total Expense = {{$totalExpense}} BDT</h2>
+                    <hr style="width: 50%; float:right;"><br>
+                    <h2 class="my-2 text-right text-primary" style="font-size:18px;">Net Income= {{$balanced}} BDT</h2>
+
+
+                </div>
+            </div>
+    </div>
+</div>
 <div class="row">
 <div class="col-md-10">
 <div class="d-flex items-center justify-content-between">
