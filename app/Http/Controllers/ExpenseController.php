@@ -13,7 +13,8 @@ class ExpenseController extends Controller
         $userID = Auth::user()->id;
         $data['serial'] = 1;
         
-        $data['expenses'] = Expense::with('category')->where('user_id',$userID)->paginate(10);
+        $data['expenses'] = Expense::with('category')->where('user_id',$userID)->orderBy('id','DESC')->get();
+        $data['totalExpense'] =  Expense::where('user_id',Auth::user()->id)->sum('amount');
 
          return view('expenses.index',$data);
     }
@@ -106,5 +107,10 @@ class ExpenseController extends Controller
             return redirect()->route('expense.index')->with('failed', 'Something went wrong!');
 
         }
+    }
+
+    public function totalExpense(){
+        $totalExpense = Expense::where('user_id',Auth::user()->id)->sum('amount');
+        return $totalExpense;
     }
 }

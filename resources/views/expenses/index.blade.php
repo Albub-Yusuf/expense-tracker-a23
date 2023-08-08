@@ -4,7 +4,8 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Expense List') }}
         </h2>
-    </x-slot>
+        
+</x-slot>
 
 <div class="max-w-xl mx-auto p-4 sm:p-6 lg:p-8">
 <div x-data="{ showMessage: true }" x-show="showMessage" class="flex justify-center">
@@ -98,26 +99,15 @@
 
 </div>
 
-<div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8 flex items-center justify-between">
-
-
-
-
-<h2>Expense List</h2>
-
-
-
-
-<a href="{{route('expense.create')}}"><x-primary-button>Add Expense</x-primary-button></a>
-
-
-</div>
 
 <div class="container mx-auto">
 <div class="row">
 <div class="col-md-10">
-   
-<table class="table">
+<div class="d-flex items-center justify-content-between">
+<h2 class="my-4 text-right text-primary">Total Expense = {{$totalExpense}} BDT</h2>
+<a href="{{route('expense.create')}}"><x-primary-button>Add Expense</x-primary-button></a>
+</div>
+<table class="table" id="expense_list">
   <thead>
     <tr>
       <th>Serial</th>
@@ -128,7 +118,7 @@
       <th>Action</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="tableList">
    @foreach($expenses as $expense)
 
    <tr>
@@ -166,7 +156,6 @@
   
 </table>
 
-{{ $expenses->links() }}
 </div>
 </div>
 
@@ -175,3 +164,9 @@
 
 
 </x-app-layout>
+
+<script>
+ $(function() {
+   $('#expense_list').DataTable();
+ });
+</script>

@@ -14,6 +14,9 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="{{asset('assets/css/dtables.css')}}">
+        <script src="{{asset('assets/js/jquery.js')}}"></script>
+        <script src="{{asset('assets/js/dtables.js')}}"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

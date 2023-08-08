@@ -13,7 +13,9 @@ class IncomeController extends Controller
         $userID = Auth::user()->id;
         $data['serial'] = 1;
         
-        $data['incomes'] =  Income::where('user_id',$userID)->orderBy('id','DESC')->paginate(10);
+        $data['incomes'] =  Income::where('user_id',$userID)->orderBy('id','DESC')->get();
+        $data['totalIncome'] = Income::where('user_id',Auth::user()->id)->sum('amount');
+
 
         return view('income.index',$data);
     }
@@ -97,5 +99,10 @@ class IncomeController extends Controller
             return redirect()->route('income.index')->with('failed', 'Something went wrong!');
 
         }
+    }
+
+    public function totalIncome(){
+        $totalIncome = Income::where('user_id',Auth::user()->id)->sum('amount');
+        return $totalIncome;
     }
 }

@@ -4,7 +4,9 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Income List') }}
         </h2>
-    </x-slot>
+</x-slot>
+
+
 
 <div class="max-w-xl mx-auto p-4 sm:p-6 lg:p-8">
 <div x-data="{ showMessage: true }" x-show="showMessage" class="flex justify-center">
@@ -98,26 +100,16 @@
 
 </div>
 
-<div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8 flex items-center justify-between">
 
-
-
-
-<h2>Income List</h2>
-
-
-
-
-<a href="{{route('income.create')}}"><x-primary-button>Add Income</x-primary-button></a>
-
-
-</div>
 
 <div class="container mx-auto">
 <div class="row">
 <div class="col-md-10">
-   
-<table class="table">
+<div class="d-flex items-center justify-content-between">
+<h2 class="my-4 text-right text-primary">Total Income = {{$totalIncome}} BDT</h2>
+<a href="{{route('income.create')}}"><x-primary-button>Add Income</x-primary-button></a>
+</div>
+<table class="table" id="income_list">
   <thead>
     <tr>
       <th>Serial</th>
@@ -164,7 +156,6 @@
   
 </table>
 
-{{ $incomes->links() }}
 </div>
 </div>
 
@@ -173,3 +164,9 @@
 
 
 </x-app-layout>
+
+<script>
+ $(function() {
+   $('#income_list').DataTable();
+ });
+</script>
