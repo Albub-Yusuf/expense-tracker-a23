@@ -46,10 +46,10 @@ class ExpenseController extends Controller
 
         if($result){
       
-            return redirect()->route('expenses.index')->with('success', 'Expense Added Successfully');
+            return redirect()->route('expense.index')->with('success', 'Expense Added Successfully');
 
         }else{
-            return redirect()->route('expenses.index')->with('failed', 'Something went wrong!');
+            return redirect()->route('expense.index')->with('failed', 'Something went wrong!');
         }
     }
 
@@ -91,5 +91,20 @@ class ExpenseController extends Controller
         }
 
 
+    }
+
+    public function destroy(Expense $expense){
+
+
+
+        $result = Expense::where('user_id',Auth::user()->id)->where('id',$expense->id)
+                    ->delete();
+        if($result){
+            return redirect()->route('expense.index')->with('deleted', 'Expense deleted Successfully!');
+
+        }else{
+            return redirect()->route('expense.index')->with('failed', 'Something went wrong!');
+
+        }
     }
 }
