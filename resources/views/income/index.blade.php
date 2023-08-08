@@ -1,11 +1,11 @@
 <x-app-layout>
 
-    <x-slot name="header">
+<x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Category List') }}
+            {{ __('Income List') }}
         </h2>
     </x-slot>
- 
+
 <div class="max-w-xl mx-auto p-4 sm:p-6 lg:p-8">
 <div x-data="{ showMessage: true }" x-show="showMessage" class="flex justify-center">
     @if (session()->has('success'))
@@ -103,12 +103,12 @@
 
 
 
-<h2>Categories List</h2>
+<h2>Income List</h2>
 
 
 
 
-<x-primary-button><a href="{{route('category.create')}}">Add Category</a></x-primary-button>
+<x-primary-button><a href="{{route('income.create')}}">Add Income</a></x-primary-button>
 
 
 </div>
@@ -121,20 +121,24 @@
   <thead>
     <tr>
       <th>Serial</th>
-      <th>Category</th>
+      <th>Income</th>
+      <th>Amount</th>
+      <th>Date</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
-   @foreach($categories as $category)
+   @foreach($incomes as $income)
 
    <tr>
       <td>{{$serial++}}</td>
-      <td>{{$category->category}}</td>
+      <td>{{$income->details}}</td>
+      <td>{{$income->amount}}</td>
+      <td>{{$income->date}}</td>
       <td>
         <div class="d-flex">
              
-            <a href="{{route('category.edit',$category->id)}}">
+            <a href="{{route('income.edit',$income->id)}}">
              <x-secondary-button class="flex-inline">
                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
@@ -143,7 +147,7 @@
             </a>
             &nbsp;&nbsp;&nbsp;
          | &nbsp;&nbsp;&nbsp;
-         <form action="{{route('category.destroy',$category->id)}}" method="post">
+         <form action="{{route('income.destroy',$income->id)}}" method="post">
             @csrf
             @method('delete')
          <x-secondary-button type="submit"  onclick="return confirm('Are you sure to delete this record!');" value="X">
@@ -160,7 +164,7 @@
   
 </table>
 
-{{ $categories->links() }}
+{{ $incomes->links() }}
 </div>
 </div>
 

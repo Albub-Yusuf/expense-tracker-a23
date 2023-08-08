@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('details');
+            $table->integer('amount');
+            $table->unsignedBigInteger('user_id');
+            $table->string('date');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
