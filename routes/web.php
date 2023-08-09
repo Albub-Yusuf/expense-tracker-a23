@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckRecordsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
@@ -39,11 +40,14 @@ Route::resource('category',CategoryController::class)->middleware(['auth','verif
 
 // Income Routes
 Route::resource('income',IncomeController::class)->middleware(['auth','verified']);
-Route::get('total-income',[IncomeController::class,'totalIncome'])->middleware(['auth','verified']);
 
 // Expense Routes
 Route::resource('expense',ExpenseController::class)->middleware(['auth','verified']);
-Route::get('total-expense',[ExpenseController::class,'totalExpense'])->middleware(['auth','verified']);
+
+// Records Showing Routes
+
+Route::get('/records',[CheckRecordsController::class,'summaryPage'])->middleware(['auth','verified'])->name('records.summary');
+Route::post('/calculate-records',[CheckRecordsController::class,'calculateRedcords'])->middleware(['auth','verified'])->name('records.calculate');
 
 
 
